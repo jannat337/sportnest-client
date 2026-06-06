@@ -1,8 +1,24 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 const Home = () => {
+  const [facilities, setFacilities] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { user } = useAuth()
+
+  useEffect(() => {
+    fetch('http://localhost:5000/facilities')
+      .then(res => res.json())
+      .then(data => {
+        setFacilities(data.slice(0, 6))
+        setLoading(false)
+      })
+  }, [])
+
   return (
     <div>
+      {/* Banner Section */}
       <section className="bg-gradient-to-r from-green-800 to-green-600 text-white py-24 px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           Book Your Sports Facility
@@ -18,12 +34,90 @@ const Home = () => {
         </Link>
       </section>
 
+      {/* Featured Facilities */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
           Featured Facilities
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <p className="text-center text-gray-500 col-span-3">Loading facilities...</p>
+        {loading ? (
+          <div className="flex justify-center">
+            <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {facilities.map(facility => (
+              <div key={facility._id} className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <img src={facility.image} alt={facility.name} className="w-full h-48 object-cover" />
+                <div className="p-5">
+                  <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">
+                    {facility.facility_type}
+                  </span>
+                  <h3 className="text-xl font-bold text-gray-800 mt-2">{facility.name}</h3>
+                  <p className="text-gray-500 text-sm mt-1">📍 {facility.location}</p>
+                  <p className="text-green-700 font-semibold mt-2">৳{facility.price_per_hour}/hour</p>
+                  <Link
+                    to={user ? `/facility/${facility._id}` : '/login'}
+                    className="mt-4 block text-center bg-green-700 text-white py-2 rounded-lg font-semibold hover:bg-green-800 transition"
+                  >
+                    Book Now
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="bg-gray-50 py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Why Choose SportNest?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+              <div className="text-5xl mb-4">🏆</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Premium Facilities</h3>
+              <p className="text-gray-500">Access top-quality sports facilities at affordable prices.</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+              <div className="text-5xl mb-4">⚡</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Easy Booking</h3>
+              <p className="text-gray-500">Book your favorite facility in just a few clicks.</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-2xl shadow-md">
+              <div className="text-5xl mb-4">🔒</div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Secure Payments</h3>
+              <p className="text-gray-500">Your bookings and payments are always safe with us.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+              <h3 className="font-bold text-gray-800 mb-2">Browse Facilities</h3>
+              <p className="text-gray-500 text-sm">Explore our wide range of sports facilities.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+              <h3 className="font-bold text-gray-800 mb-2">Select Date & Time</h3>
+              <p className="text-gray-500 text-sm">Choose your preferred date and time slot.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+              <h3 className="font-bold text-gray-800 mb-2">Confirm Booking</h3>
+              <p className="text-gray-500 text-sm">Review and confirm your booking details.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
+              <h3 className="font-bold text-gray-800 mb-2">Play & Enjoy</h3>
+              <p className="text-gray-500 text-sm">Show up and enjoy your sports session!</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
