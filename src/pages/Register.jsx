@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast, Toaster } from 'react-hot-toast'
+import useAuth from '../hooks/useAuth'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [photoURL, setPhotoURL] = useState('')
   const [password, setPassword] = useState('')
+  const { register, updateUserProfile, googleLogin } = useAuth()
   const navigate = useNavigate()
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault()
 
-    // Password validation
     if (password.length < 6) {
       return toast.error('Password must be at least 6 characters!')
     }
@@ -23,8 +24,24 @@ const Register = () => {
       return toast.error('Password must have at least one lowercase letter!')
     }
 
-    toast.success('Registration successful!')
-    setTimeout(() => navigate('/login'), 1500)
+    try {
+      await register(email, password)
+      await updateUserProfile(name, photoURL)
+      toast.success('Registration successful!')
+      navigate('/login')
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin()
+      toast.success('Login successful!')
+      navigate('/')
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   return (
@@ -90,7 +107,10 @@ const Register = () => {
         </form>
 
         <div className="mt-4">
-          <button className="w-full border border-gray-300 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full border border-gray-300 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition"
+          >
             <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
             Continue with Google
           </button>

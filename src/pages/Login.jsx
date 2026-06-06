@@ -1,14 +1,35 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { toast, Toaster } from 'react-hot-toast'
+import useAuth from '../hooks/useAuth'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { login, googleLogin } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    toast.success('Login successful!')
+    try {
+      await login(email, password)
+      toast.success('Login successful!')
+      navigate(from, { replace: true })
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin()
+      toast.success('Login successful!')
+      navigate(from, { replace: true })
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   return (
@@ -51,7 +72,10 @@ const Login = () => {
         </form>
 
         <div className="mt-4">
-          <button className="w-full border border-gray-300 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full border border-gray-300 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition"
+          >
             <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
             Continue with Google
           </button>
