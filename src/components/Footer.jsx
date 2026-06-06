@@ -9,7 +9,7 @@ const Footer = () => {
         
         {/* Logo & About */}
         <div>
-          <h2 className="text-2xl font-bold mb-3">🏟️ SportNest</h2>
+          <h2 className="text-2xl font-bold mb-3"> SportNest</h2>
           <p className="text-green-300 text-sm">
             Your go-to platform for booking sports facilities. Find and book football turfs, badminton courts, swimming lanes and more.
           </p>

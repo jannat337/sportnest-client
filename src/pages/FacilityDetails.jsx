@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast, Toaster } from 'react-hot-toast'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 import useAuth from '../hooks/useAuth'
 
 const FacilityDetails = () => {
@@ -64,13 +65,16 @@ const FacilityDetails = () => {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <Toaster />
       <img src={facility.image} alt={facility.name} className="w-full h-64 object-cover rounded-2xl mb-6" />
+
       <div className="bg-white p-6 rounded-2xl shadow-md mb-6">
         <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">
           {facility.facility_type}
         </span>
         <h1 className="text-3xl font-bold text-gray-800 mt-2">{facility.name}</h1>
-        <p className="text-gray-500 mt-1">📍 {facility.location}</p>
-        <p className="text-green-700 font-semibold mt-2 text-xl">৳{facility.price_per_hour}/hour</p>
+        <p className="text-gray-500 mt-1 flex items-center gap-1">
+          <FaMapMarkerAlt className="text-green-600" /> {facility.location}
+        </p>
+        <p className="text-green-700 font-semibold mt-2 text-xl">BDT {facility.price_per_hour}/hour</p>
         <p className="text-gray-500">👥 Capacity: {facility.capacity}</p>
         <p className="text-gray-500">🕐 Available Slots: {facility.available_slots}</p>
         <p className="text-gray-600 mt-4">{facility.description}</p>
@@ -109,7 +113,7 @@ const FacilityDetails = () => {
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-1">Total Price</label>
-            <input value={`৳${totalPrice}`} readOnly
+            <input value={`BDT ${totalPrice}`} readOnly
               className="w-full border border-gray-200 rounded-lg px-4 py-2 bg-gray-50 text-green-700 font-semibold" />
           </div>
           <button type="submit"

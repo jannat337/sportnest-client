@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 import useAuth from '../hooks/useAuth'
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
   const { user } = useAuth()
 
   useEffect(() => {
-    fetch('http://localhost:5000/facilities')
+    fetch(`${import.meta.env.VITE_API_URL}/facilities`)
       .then(res => res.json())
       .then(data => {
         setFacilities(data.slice(0, 6))
@@ -18,7 +19,6 @@ const Home = () => {
 
   return (
     <div>
-      {/* Banner Section */}
       <section className="bg-gradient-to-r from-green-800 to-green-600 text-white py-24 px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           Book Your Sports Facility
@@ -34,7 +34,6 @@ const Home = () => {
         </Link>
       </section>
 
-      {/* Featured Facilities */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
           Featured Facilities
@@ -53,8 +52,10 @@ const Home = () => {
                     {facility.facility_type}
                   </span>
                   <h3 className="text-xl font-bold text-gray-800 mt-2">{facility.name}</h3>
-                  <p className="text-gray-500 text-sm mt-1">📍 {facility.location}</p>
-                  <p className="text-green-700 font-semibold mt-2">৳{facility.price_per_hour}/hour</p>
+                  <p className="text-gray-500 text-sm mt-1 flex items-center gap-1">
+                    <FaMapMarkerAlt className="text-green-600" /> {facility.location}
+                  </p>
+                  <p className="text-green-700 font-semibold mt-2">BDT {facility.price_per_hour}/hour</p>
                   <Link
                     to={user ? `/facility/${facility._id}` : '/login'}
                     className="mt-4 block text-center bg-green-700 text-white py-2 rounded-lg font-semibold hover:bg-green-800 transition"
@@ -68,7 +69,6 @@ const Home = () => {
         )}
       </section>
 
-      {/* Why Choose Us Section */}
       <section className="bg-gray-50 py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Why Choose SportNest?</h2>
@@ -92,7 +92,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">How It Works</h2>
