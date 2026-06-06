@@ -8,7 +8,9 @@ const MyBookings = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/bookings?email=${user.email}`)
+    fetch(`${import.meta.env.VITE_API_URL}/bookings?email=${user.email}`, {
+      credentials: 'include'
+    })
       .then(res => res.json())
       .then(data => {
         setBookings(data)
@@ -21,8 +23,9 @@ const MyBookings = () => {
     if (!confirm) return
 
     try {
-      const res = await fetch(`http://localhost:5000/bookings/${id}`, {
-        method: 'DELETE'
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/bookings/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
       })
       const data = await res.json()
       if (data.deletedCount) {

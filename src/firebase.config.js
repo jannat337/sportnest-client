@@ -2,13 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDrIaGJBb3i0FYIXLgK7K-EuGsraAuRzE0",
-  authDomain: "sportnest-f41cb.firebaseapp.com",
-  projectId: "sportnest-f41cb",
-  storageBucket: "sportnest-f41cb.firebasestorage.app",
-  messagingSenderId: "593747271900",
-  appId: "1:593747271900:web:d6cdec82da145a67751419",
-  measurementId: "G-125EQMJGYN"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

@@ -9,7 +9,7 @@ const ManageFacilities = () => {
   const [editFacility, setEditFacility] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:5000/facilities')
+    fetch(`${import.meta.env.VITE_API_URL}/facilities`)
       .then(res => res.json())
       .then(data => {
         const myFacilities = data.filter(f => f.owner_email === user.email)
@@ -23,8 +23,9 @@ const ManageFacilities = () => {
     if (!confirm) return
 
     try {
-      const res = await fetch(`http://localhost:5000/facilities/${id}`, {
-        method: 'DELETE'
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/facilities/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
       })
       const data = await res.json()
       if (data.deletedCount) {
@@ -39,9 +40,10 @@ const ManageFacilities = () => {
   const handleUpdate = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch(`http://localhost:5000/facilities/${editFacility._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/facilities/${editFacility._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(editFacility)
       })
       const data = await res.json()
@@ -108,7 +110,6 @@ const ManageFacilities = () => {
         </div>
       )}
 
-      {/* Edit Modal */}
       {editFacility && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-lg max-h-screen overflow-y-auto">

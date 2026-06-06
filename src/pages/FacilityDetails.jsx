@@ -14,7 +14,7 @@ const FacilityDetails = () => {
   const [hours, setHours] = useState(1)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/facilities/${id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/facilities/${id}`)
       .then(res => res.json())
       .then(data => {
         setFacility(data)
@@ -44,9 +44,10 @@ const FacilityDetails = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/bookings', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(bookingData)
       })
       const data = await res.json()
@@ -63,7 +64,6 @@ const FacilityDetails = () => {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <Toaster />
       <img src={facility.image} alt={facility.name} className="w-full h-64 object-cover rounded-2xl mb-6" />
-
       <div className="bg-white p-6 rounded-2xl shadow-md mb-6">
         <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">
           {facility.facility_type}
@@ -76,7 +76,6 @@ const FacilityDetails = () => {
         <p className="text-gray-600 mt-4">{facility.description}</p>
       </div>
 
-      {/* Booking Form */}
       <div className="bg-white p-6 rounded-2xl shadow-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Book This Facility</h2>
         <form onSubmit={handleBooking} className="space-y-4">
