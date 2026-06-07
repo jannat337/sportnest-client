@@ -19,21 +19,34 @@ const Home = () => {
 
   return (
     <div>
-      <section className="bg-gradient-to-r from-green-800 to-green-600 text-white py-24 px-4 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          Book Your Sports Facility
-        </h1>
-        <p className="text-lg md:text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-          Find and book the best football turfs, badminton courts, swimming lanes and tennis courts near you.
-        </p>
-        <Link
-          to="/facilities"
-          className="bg-white text-green-700 px-8 py-3 rounded-full font-bold text-lg hover:bg-green-100 transition"
-        >
-          Explore Facilities
-        </Link>
+      {/* Banner Section */}
+      <section
+        className="relative text-white py-32 px-4 text-center"
+        style={{
+          backgroundImage: "url('https://img.freepik.com/premium-photo/football-match-group-b-uefa-champions-league-fc-shakhtar-donetsk-vs-real-madrid-fc_1308175-144567.jpg?w=1600')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-black opacity-55"></div>
+        <div className="relative z-10">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Book Your Sports Facility
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+            Find and book the best football turfs, badminton courts, swimming lanes and tennis courts near you.
+          </p>
+          <Link
+            to="/facilities"
+            className="bg-white text-green-700 px-8 py-3 rounded-full font-bold text-lg hover:bg-green-100 transition"
+          >
+            Explore Facilities
+          </Link>
+        </div>
       </section>
 
+      {/* Featured Facilities */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
           Featured Facilities
@@ -69,6 +82,7 @@ const Home = () => {
         )}
       </section>
 
+      {/* Why Choose Us Section */}
       <section className="bg-gray-50 py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Why Choose SportNest?</h2>
@@ -92,6 +106,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* How It Works Section */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">How It Works</h2>

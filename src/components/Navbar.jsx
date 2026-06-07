@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
-import { FaFutbol, FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import useAuth from '../hooks/useAuth'
 
 const Navbar = () => {
@@ -21,14 +21,14 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-green-900 text-white shadow-lg sticky top-0 z-50">
       <Toaster />
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="bg-white p-2 rounded-lg">
-            <FaFutbol className="text-green-700 text-xl" />
+          <div className="bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md border-2 border-green-200">
+            <span className="text-green-700 font-extrabold text-sm tracking-tight">SN</span>
           </div>
           <span className="text-2xl font-extrabold tracking-wide">Sport<span className="text-green-200">Nest</span></span>
         </Link>
