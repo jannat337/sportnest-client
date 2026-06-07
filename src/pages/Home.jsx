@@ -71,10 +71,9 @@ const Home = () => {
             {facilities.map((facility, index) => (
               <motion.div
                 key={facility._id}
-                className="bg-white rounded-2xl shadow-md overflow-hidden transition"
+                className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <img src={facility.image} alt={facility.name} className="w-full h-48 object-cover" />
@@ -122,7 +121,6 @@ const Home = () => {
                 className="text-center p-6 bg-white rounded-2xl shadow-md"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.05, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <div className="text-5xl mb-4">{item.icon}</div>
@@ -157,7 +155,6 @@ const Home = () => {
                 className="text-center"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">{item.num}</div>
