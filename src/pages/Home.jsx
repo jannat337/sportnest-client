@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaMapMarkerAlt } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 import useAuth from '../hooks/useAuth'
 
 const Home = () => {
@@ -30,7 +31,12 @@ const Home = () => {
         }}
       >
         <div className="absolute inset-0 bg-black opacity-55"></div>
-        <div className="relative z-10">
+        <motion.div
+          className="relative z-10"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Book Your Sports Facility
           </h1>
@@ -43,22 +49,33 @@ const Home = () => {
           >
             Explore Facilities
           </Link>
-        </div>
+        </motion.div>
       </section>
 
       {/* Featured Facilities */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
+        <motion.h2
+          className="text-3xl font-bold text-center text-gray-800 mb-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           Featured Facilities
-        </h2>
+        </motion.h2>
         {loading ? (
           <div className="flex justify-center">
             <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {facilities.map(facility => (
-              <div key={facility._id} className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
+            {facilities.map((facility, index) => (
+              <motion.div
+                key={facility._id}
+                className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
                 <img src={facility.image} alt={facility.name} className="w-full h-48 object-cover" />
                 <div className="p-5">
                   <span className="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">
@@ -76,7 +93,7 @@ const Home = () => {
                     Book Now
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}
@@ -85,23 +102,32 @@ const Home = () => {
       {/* Why Choose Us Section */}
       <section className="bg-gray-50 py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">Why Choose SportNest?</h2>
+          <motion.h2
+            className="text-3xl font-bold text-center text-gray-800 mb-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            Why Choose SportNest?
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-white rounded-2xl shadow-md">
-              <div className="text-5xl mb-4">🏆</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Premium Facilities</h3>
-              <p className="text-gray-500">Access top-quality sports facilities at affordable prices.</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-2xl shadow-md">
-              <div className="text-5xl mb-4">⚡</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Easy Booking</h3>
-              <p className="text-gray-500">Book your favorite facility in just a few clicks.</p>
-            </div>
-            <div className="text-center p-6 bg-white rounded-2xl shadow-md">
-              <div className="text-5xl mb-4">🔒</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Secure Payments</h3>
-              <p className="text-gray-500">Your bookings and payments are always safe with us.</p>
-            </div>
+            {[
+              { icon: '🏆', title: 'Premium Facilities', desc: 'Access top-quality sports facilities at affordable prices.' },
+              { icon: '⚡', title: 'Easy Booking', desc: 'Book your favorite facility in just a few clicks.' },
+              { icon: '🔒', title: 'Secure Payments', desc: 'Your bookings and payments are always safe with us.' }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="text-center p-6 bg-white rounded-2xl shadow-md"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <div className="text-5xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
+                <p className="text-gray-500">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -109,28 +135,33 @@ const Home = () => {
       {/* How It Works Section */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">How It Works</h2>
+          <motion.h2
+            className="text-3xl font-bold text-center text-gray-800 mb-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            How It Works
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-              <h3 className="font-bold text-gray-800 mb-2">Browse Facilities</h3>
-              <p className="text-gray-500 text-sm">Explore our wide range of sports facilities.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-              <h3 className="font-bold text-gray-800 mb-2">Select Date & Time</h3>
-              <p className="text-gray-500 text-sm">Choose your preferred date and time slot.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-              <h3 className="font-bold text-gray-800 mb-2">Confirm Booking</h3>
-              <p className="text-gray-500 text-sm">Review and confirm your booking details.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
-              <h3 className="font-bold text-gray-800 mb-2">Play & Enjoy</h3>
-              <p className="text-gray-500 text-sm">Show up and enjoy your sports session!</p>
-            </div>
+            {[
+              { num: 1, title: 'Browse Facilities', desc: 'Explore our wide range of sports facilities.' },
+              { num: 2, title: 'Select Date & Time', desc: 'Choose your preferred date and time slot.' },
+              { num: 3, title: 'Confirm Booking', desc: 'Review and confirm your booking details.' },
+              { num: 4, title: 'Play & Enjoy', desc: 'Show up and enjoy your sports session!' }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="text-center"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <div className="w-16 h-16 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">{item.num}</div>
+                <h3 className="font-bold text-gray-800 mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

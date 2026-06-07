@@ -1,16 +1,36 @@
-# React + Vite
+# SportNest - Sports Facility Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Purpose
+SportNest is a full-stack sports facility booking platform where users can explore and book sports facilities like football turfs, badminton courts, swimming lanes, and tennis courts.
 
-Currently, two official plugins are available:
+## Live URL
+Coming soon...
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- Browse and search sports facilities
+- Filter by sport type
+- User authentication (Email/Password + Google)
+- Add and manage your own facilities
+- Book facilities with date and time slot
+- View and cancel bookings
+- JWT authentication with HTTP-only cookies
+- Responsive design for mobile, tablet and desktop
 
-## React Compiler
+## NPM Packages Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Client
+- react
+- react-router-dom
+- firebase
+- react-hot-toast
+- react-icons
+- tailwindcss
+- axios
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Server
+- express
+- mongoose
+- cors
+- dotenv
+- jsonwebtoken
+- cookie-parser

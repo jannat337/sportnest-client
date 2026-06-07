@@ -1,13 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa'
 import useAuth from '../hooks/useAuth'
+import { useTheme } from '../context/ThemeContext'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { user, logout } = useAuth()
+  const { darkMode, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -38,6 +40,14 @@ const Navbar = () => {
           <Link to="/" className="hover:text-green-200 transition font-medium">Home</Link>
           <Link to="/facilities" className="hover:text-green-200 transition font-medium">All Facilities</Link>
 
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="bg-green-700 p-2 rounded-full hover:bg-green-600 transition"
+          >
+            {darkMode ? <FaSun className="text-yellow-300" /> : <FaMoon className="text-white" />}
+          </button>
+
           {user ? (
             <div className="relative">
               <img
@@ -64,14 +74,19 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-xl" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <FaTimes /> : <FaBars />}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <button onClick={toggleTheme} className="bg-green-700 p-2 rounded-full">
+            {darkMode ? <FaSun className="text-yellow-300" /> : <FaMoon className="text-white" />}
+          </button>
+          <button className="text-xl" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-green-800 px-4 py-3 flex flex-col gap-3">
+        <div className="md:hidden bg-green-950 px-4 py-3 flex flex-col gap-3">
           <Link to="/" onClick={() => setIsOpen(false)} className="hover:text-green-200 font-medium">Home</Link>
           <Link to="/facilities" onClick={() => setIsOpen(false)} className="hover:text-green-200 font-medium">All Facilities</Link>
           {user ? (
