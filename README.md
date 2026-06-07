@@ -7,27 +7,33 @@ SportNest is a full-stack sports facility booking platform where users can explo
 Coming soon...
 
 ## Features
-- Browse and search sports facilities
-- Filter by sport type
-- User authentication (Email/Password + Google)
-- Add and manage your own facilities
-- Book facilities with date and time slot
-- View and cancel bookings
+- Browse and search sports facilities by name
+- Filter facilities by sport type
+- User authentication with Email/Password and Google login
+- Add new sports facilities (private)
+- Book facilities with date, time slot and hours
+- View and cancel your bookings (private)
+- Manage and update your own facilities (private)
 - JWT authentication with HTTP-only cookies
+- Dark/Light theme toggle
+- Framer Motion animations
 - Responsive design for mobile, tablet and desktop
+- Custom 404 page
+- Loading spinner
 
 ## NPM Packages Used
 
-### Client
+### Client Side
 - react
 - react-router-dom
 - firebase
 - react-hot-toast
 - react-icons
 - tailwindcss
+- framer-motion
 - axios
 
-### Server
+### Server Side
 - express
 - mongoose
 - cors
