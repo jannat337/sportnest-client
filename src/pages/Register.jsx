@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast, Toaster } from 'react-hot-toast'
+import { motion } from 'framer-motion'
 import useAuth from '../hooks/useAuth'
 
 const Register = () => {
@@ -47,7 +48,12 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <Toaster />
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+      <motion.div
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-3xl font-bold text-center text-green-700 mb-6">Create Account</h2>
 
         <form onSubmit={handleRegister} className="space-y-4">
@@ -122,7 +128,7 @@ const Register = () => {
             Login
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   )
 }
